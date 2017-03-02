@@ -8,6 +8,11 @@ std::vector<std::shared_ptr<collision::StaticPPlane> > Box::getPlanes() const
     return planes;
 }
 
+//std::vector<std::shared_ptr<collision::StaticPSphere> > Box::getSpheres() const
+//{
+//    return spheres;
+//}
+
 Box::Box(double x, double y, double z, GMlib::Material color)
 {
     this->x=x;//20
@@ -33,6 +38,12 @@ Box::Box(double x, double y, double z, GMlib::Material color)
                       GMlib::Vector<float,3>(0.0f, 0.0f, -z)));
 
 
+    planes.push_back(std::make_unique<collision::StaticPPlane>
+                     (GMlib::Point<float,3>(0.0f, 0.0f, 0.0f),
+                      GMlib::Vector<float,3>(5.0f, 0.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
+
+
     //west
     planes.push_back(std::make_unique<collision::StaticPPlane>
                      (GMlib::Point<float,3>(-x, x, z),
@@ -52,6 +63,11 @@ Box::Box(double x, double y, double z, GMlib::Material color)
                       GMlib::Vector<float,3>(0.0f, y, 0.0f)));
 
 
+    //spheres.push_back(std::make_unique<collision::StaticPSphere>());
+   // spheres.at(0)->translateGlobal(GMlib::Vector<float,3>(10.0f,10.0f,2.0f));
+
+
+
     //ceiling
 //    planes.push_back(std::make_unique<collision::StaticPPlane>
 //                     (GMlib::Point<float,3>(x-r, y-r, z+r),
@@ -68,6 +84,15 @@ Box::Box(double x, double y, double z, GMlib::Material color)
         this->insert(plane.get());
 
     }
+
+//    for (const auto& sphere : spheres)
+//    {
+//        sphere->toggleDefaultVisualizer();
+//        sphere->replot();
+//        sphere->setMaterial(color);
+//        this->insert(sphere.get());
+
+//    }
     setSurroundingSphere(GMlib::Sphere<float,3>(GMlib::Point<float,3>(0.0f,0.0f,0.0f),1.0f));
 }
 

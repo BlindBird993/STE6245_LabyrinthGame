@@ -47,6 +47,12 @@ signals:
 private:
   static std::unique_ptr<GuiApplication>      _instance;
 
+//button movement
+  void sphereUp();
+  void sphereDown();
+  void sphereLeft();
+  void sphereRight();
+
 //FEM
   void replotSimulateGui();
 

@@ -19,7 +19,7 @@ private:
 
     float _max = 1.0;
     float _min = -1.0;
-    //float _testmax;
+
 
     bool forceswicher = true;
     double force = 0.0;
@@ -27,9 +27,6 @@ private:
 public:
 
     FEMobject():GMlib::TriangleFacets<float>(50){}
-//    FEMobject( int d = 0 );
-//    FEMobject( const GMlib::ArrayLX<GMlib::TSVertex<T> >& v);
-    //~FEMobject();
     int randNum(int nMin, int nMax);
     void regularTriangulation(int n,int m, float r,bool switcher);
     void randomTriangulation(int n, float r);

@@ -508,7 +508,26 @@ GMlib::Point<int,2> DefaultHidManager::toGMlibViewPoint(const QString& view_name
   auto cam = findCamera(view_name);
   return Vector<int,2>( int(pos.x()), cam->getViewportH() - int(pos.y()) - 1 );
 }
+//emit the signal
+void DefaultHidManager::heGoUp() {
 
+    emit signGoUp();
+}
+
+void DefaultHidManager::heGoDown() {
+
+    emit signGoDown();
+}
+
+void DefaultHidManager::heGoLeft() {
+
+    emit signGoLeft();
+}
+
+void DefaultHidManager::heGoRight() {
+
+    emit signGoRight();
+}
 void DefaultHidManager::setupDefaultHidBindings() {
 
   //// Register Hid Actions
@@ -648,7 +667,33 @@ void DefaultHidManager::setupDefaultHidBindings() {
                          "Stuff that happens on left mouse release",
                          this, SLOT(heLeftMouseReleaseStuff()) );
 
+  QString ha_id_control_up =
+       registerHidAction( "Controls",
+                          "Ball up",
+                          "Ball up",
+                          this, SLOT(heGoUp()),
+                          OGL_TRIGGER);
 
+  QString ha_id_control_down =
+       registerHidAction( "Controls",
+                          "Ball down",
+                          "Ball down",
+                          this, SLOT(heGoDown()),
+                          OGL_TRIGGER);
+
+  QString ha_id_control_left =
+       registerHidAction( "Controls",
+                          "Ball left",
+                          "Ball left",
+                          this, SLOT(heGoLeft()),
+                          OGL_TRIGGER);
+
+  QString ha_id_control_right =
+       registerHidAction( "Controls",
+                          "Ball right",
+                          "Ball right",
+                          this, SLOT(heGoRight()),
+                          OGL_TRIGGER);
 
 
   //// Set up initial mapping
@@ -659,6 +704,11 @@ void DefaultHidManager::setupDefaultHidBindings() {
   registerHidMapping( ha_id_objint_replot_low,            new KeyPressInput( Qt::Key_P, Qt::ControlModifier) );
   registerHidMapping( ha_id_sim_toggle,                   new KeyPressInput( Qt::Key_R ) );
   registerHidMapping( ha_id_render_toggle_shademode,      new KeyPressInput( Qt::Key_Z ) );
+
+  registerHidMapping( ha_id_control_up,                   new KeyPressInput( Qt::Key_Up));
+  registerHidMapping( ha_id_control_down,                 new KeyPressInput( Qt::Key_Down));
+  registerHidMapping( ha_id_control_left,                 new KeyPressInput( Qt::Key_Left));
+  registerHidMapping( ha_id_control_right,                new KeyPressInput( Qt::Key_Right));
 
   registerHidMapping( ha_id_objsel_select,                new MousePressInput( Qt::RightButton ) );
   registerHidMapping( ha_id_view_lock_to,                 new MousePressInput( Qt::RightButton, Qt::ControlModifier ) );

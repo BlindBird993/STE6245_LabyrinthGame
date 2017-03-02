@@ -103,14 +103,14 @@ GuiApplication::afterOnSceneGraphInitialized() {
 
   // Handle HID OpenGL actions; needs to have the OGL context bound;
   // QQuickWindow's beforeRendering singnal provides that on a DirectConnection
-  connect( &_window, &Window::beforeRendering,        &_hidmanager, &DefaultHidManager::triggerOGLActions,
+   connect( &_window, &Window::beforeRendering,        &_hidmanager, &DefaultHidManager::triggerOGLActions,
            Qt::DirectConnection );
 
 
 //FEM
-//  connect( &_window, &Window::beforeRendering,
-//           this,     &GuiApplication::replotSimulateGui,
-//           Qt::DirectConnection );
+  connect( &_window, &Window::beforeRendering,
+           this,     &GuiApplication::replotSimulateGui,
+           Qt::DirectConnection );
 
 
   // Register an application close event in the hidmanager;
@@ -127,18 +127,56 @@ GuiApplication::afterOnSceneGraphInitialized() {
   connect( &_hidmanager,          SIGNAL(signOpenCloseHidHelp()),
            _window.rootObject(),  SIGNAL(toggleHidBindView()) );
 
+
+  // connect for key pressing!
+  connect( &_hidmanager, &DefaultHidManager::signGoUp,
+              this, &GuiApplication::sphereUp, Qt::DirectConnection );
+
+  connect( &_hidmanager, &DefaultHidManager::signGoDown,
+              this, &GuiApplication::sphereDown, Qt::DirectConnection );
+
+  connect( &_hidmanager, &DefaultHidManager::signGoLeft,
+              this, &GuiApplication::sphereLeft, Qt::DirectConnection );
+
+  connect( &_hidmanager, &DefaultHidManager::signGoRight,
+              this, &GuiApplication::sphereRight, Qt::DirectConnection );
+
+  //end of connects
+
   // Update RCPair name model
   _scenario.updateRCPairNameModel();
 
   // Start simulator
   _scenario.start();
+ }
+
+//button movement Up
+void GuiApplication::sphereUp()
+{
+    _scenario.sphereUp();
+}
+
+void GuiApplication::sphereDown()
+{
+    _scenario.sphereDown();
+}
+
+void GuiApplication::sphereLeft()
+{
+    _scenario.sphereLeft();
+}
+
+void GuiApplication::sphereRight()
+{
+    _scenario.sphereRight();
+
 }
 
 const GuiApplication& GuiApplication::instance() {  return *_instance; }
 
 
 //FEM
-//void GuiApplication::replotSimulateGui()
-//{
-//    //_scenario.simulateReplot();
-//}
+void GuiApplication::replotSimulateGui()
+{
+    _scenario.simulateReplot();
+}

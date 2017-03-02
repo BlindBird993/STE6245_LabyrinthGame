@@ -279,11 +279,11 @@ Simulator::Simulator(GMlib::Scene& scene) : _scene{scene}
 }
 
 //FEM
-//    void Simulator::simulateReplotSim()
-//    {
-//            //    _obj1->replot();
-//            //    _obj2->replot();
-//    }
+    void Simulator::simulateReplotSim()
+    {
+//                _obj1->replot();
+//                _obj2->replot();
+    }
 
 
 void Simulator::setupSimulator()
@@ -377,35 +377,43 @@ void Simulator::setupSimulator()
     }
 **/
 
+
  //FEM
 
-    //_obj1 = new FEMobject();
-    //_obj2 = new FEMobject();
+//    _obj1 = new FEMobject();
+//    _obj2 = new FEMobject();
 
-    //_obj1->regularTriangulation(10,5,5,true);
-    //_obj2->randomTriangulation(50,5);
+//    _obj1->regularTriangulation(10,5,5,true);
+//    _obj2->randomTriangulation(50,5);
 
-    //_obj1->translateGlobal(GMlib::Vector<float,3> (12.0f,0.0f,0.0f),true);
-    //_obj1->computation();
-    //_obj1->updateHeight(1);
+//    _obj1->translateGlobal(GMlib::Vector<float,3> (12.0f,0.0f,0.0f),true);
+//    _obj1->computation();
+//    _obj1->updateHeight(1);
 
-    //_obj2->computation();
-    //_obj2->updateHeight(1);
+//    _obj2->computation();
+//    _obj2->updateHeight(1);
 
-    //_obj1->toggleDefaultVisualizer();
-
-
-    //_obj2->toggleDefaultVisualizer();
+//    _obj1->toggleDefaultVisualizer();
 
 
-    //_scene.insert(_obj1);
-    //_scene.insert(_obj2);
+//    _obj2->toggleDefaultVisualizer();
+
+
+//    _scene.insert(_obj1);
+//    _scene.insert(_obj2);
 
 
    _dspheres.push_back(std::make_unique<DynSphere>());
+//   _dspheres.push_back(std::make_unique<DynSphere>());
+   //_dspheres.push_back(std::make_unique<DynSphere>());
 
-   _dspheres.at(0)->velocity = GMlib::Vector<double,3>(0.0f,0.0f,0.0f);
-   _dspheres.at(0)->translateGlobal(GMlib::Vector<float,3>(0.0f,10.0f,2.0f));
+   _controlSphere = (_dspheres.at(0)).get();
+
+   _dspheres.at(0)->velocity = GMlib::Vector<double,3>(0.0f,2.0f,0.0f);
+   _dspheres.at(0)->translateGlobal(GMlib::Vector<float,3>(0.0f,5.0f,2.0f));
+
+//   _dspheres.at(1)->velocity = GMlib::Vector<double,3>(0.0f,0.0f,0.0f);
+//   _dspheres.at(1)->translateGlobal(GMlib::Vector<float,3>(0.0f,-5.0f,2.0f));
 
 
    _box.push_back(std::make_unique<Box>(20,40,10, GMlib::GMmaterial::copper() ));
@@ -415,9 +423,81 @@ void Simulator::setupSimulator()
        prepareAndInsert(box , 10, 10, 1 ,1);
    for (const auto& plane : _planes)
        prepareAndInsert(plane , 10, 10, 1 ,1);
-   for (const auto& sphere : _dspheres)
-       prepareAndInsert(sphere , 10, 10, 1 ,1);
 
+   for (const auto& sphere : _dspheres){
+       sphere->_sphereController = &_controller;
+       prepareAndInsert(sphere , 10, 10, 1 ,1);
+   }
+
+
+
+/**
+    _planes.push_back(
+          std::make_unique<Plane> (    GMlib::Point<float, 3> (-10.0f, 2.0f, 0.0f),
+                                       GMlib::Vector<float, 3> (10.0f, -10.0f, 0.0f),
+                                       GMlib::Vector<float, 3> (10.0f, 10.0f, 0.0f)));
+        _planes.back()->setMaterial(GMlib::GMmaterial::polishedSilver());
+
+    //    _planes.push_back(std::make_unique<Plane> (    GMlib::Point<float, 3> (10.0f, 10.0f, 5.0f),
+    //                                                   GMlib::Vector<float, 3> (-20.0f, -20.0f, -10.0f),
+    //                                                   GMlib::Vector<float, 3> (0.0f, -10.0f, 5.0f)));
+
+    //     _dspheres.push_back(std::make_unique<DynSphere> ());
+    //     _dspheres.back()->velocity = GMlib::Vector<double, 3>{0.0, 2.1, 0.0};
+    //     _dspheres.back()->translate(GMlib::Vector<float,3>{1.0f,-3.0f,0.0f});
+
+    //     _dspheres.push_back(std::make_unique<DynSphere> ());
+    //     _dspheres.back()->velocity = GMlib::Vector<double, 3>{0.0, -2.1, 0.0};;
+    //     _dspheres.back()->translate(GMlib::Vector<float,3>{1.0f,3.0f,0.0f});
+
+
+    //    _dspheres.push_back(std::make_unique<DynSphere> ());
+    //    _dspheres.back()->velocity = GMlib::Vector<double,3> (0.0f, 0.0f, 0.0f);
+
+    //    _dspheres.push_back(std::make_unique<DynSphere> ());
+    //    _dspheres.back()->velocity = GMlib::Vector<double,3> (0.0f, 0.0f, 0.0f);
+    //    _dspheres.back()->translateGlobal(GMlib::Vector<float,3>{5.0f,3.0f,3.0f});
+
+    //    _dspheres.push_back(std::make_unique<DynSphere> ());
+    //    _dspheres.back()->velocity = GMlib::Vector<double,3> (0.0f, 0.0f, 0.0f);
+    //    _dspheres.back()->translateGlobal(GMlib::Vector<float,3>{-5.0f,3.0f,3.0f});
+
+    //    _dspheres.push_back(std::make_unique<DynSphere> ());
+    //    _dspheres.back()->velocity = GMlib::Vector<double,3> (0.0f, -5.0f, -4.0f);
+    //    _dspheres.back()->translateGlobal(GMlib::Vector<float,3>{0.0f,5.0f,5.0f});
+
+
+        _dspheres.push_back(std::make_unique<DynSphere> ());
+        _dspheres.back()->velocity = GMlib::Vector<double,3> (-2.0f, 0.0f, 0.0f);
+        _dspheres.back()->translateGlobal(GMlib::Vector<float,3>{0.0f,0.0f,5.0f});
+        _dspheres.back()->setMaterial(GMlib::GMmaterial::polishedRed());
+
+        _dspheres.push_back(std::make_unique<DynSphere> ());
+        _dspheres.back()->velocity = GMlib::Vector<double,3> (2.0f, 0.0f, 0.0f); //crash
+        _dspheres.back()->translateGlobal(GMlib::Vector<float,3>{-5.0f,5.0f,2.0f});
+        _dspheres.back()->setMaterial(GMlib::GMmaterial::polishedRed());
+
+        _dspheres.push_back(std::make_unique<DynSphere> ());
+        _dspheres.back()->velocity = GMlib::Vector<double,3> (20.0f, 0.0f, 0.0f);
+        _dspheres.back()->translateGlobal(GMlib::Vector<float,3>{0.0f,5.0f,0.0f});
+        _dspheres.back()->setMaterial(GMlib::GMmaterial::polishedRed());
+
+    //    _dspheres.push_back(std::make_unique<DynSphere> ());
+    //    _dspheres.back()->velocity = GMlib::Vector<double,3> (0.0f, -20.0f, 0.0f);
+    //    _dspheres.back()->translateGlobal(GMlib::Vector<float,3>{0.0f,0.0f,5.0f});
+    //    _dspheres.back()->setMaterial(GMlib::GMmaterial::polishedRed());
+
+    //_planes.push_back(std::make_unique<Plane>( GMlib::Point<float,3>(-10.0f, -10.0f, 5.0f), GMlib::Vector<float,3>(20.0f, 0.0f, 0.0f), GMlib::Vector<float,3>(0.0f, 0.0f, -5.0f) )); _planes.push_back(std::make_unique<Plane>( GMlib::Point<float,3>(10.0f, -10.0f, 5.0f), GMlib::Vector<float,3>(0.0f, 20.0f, 0.0f), GMlib::Vector<float,3>(0.0f, 0.0f, -5.0f) )); _planes.push_back(std::make_unique<Plane>( GMlib::Point<float,3>(-10.0f, 10.0f, 5.0f), GMlib::Vector<float,3>(0.0f, -20.0f, 0.0f), GMlib::Vector<float,3>(0.0f, 0.0f, -5.0f) )); _planes.push_back(std::make_unique<Plane>( GMlib::Point<float,3>(10.0f, 10.0f, 5.0f), GMlib::Vector<float,3>(-20.0f, 0.0f, 0.0f), GMlib::Vector<float,3>(0.0f, 0.0f, -5.0f) ));
+
+        for (auto& plane: _planes)
+            prepareAndInsert(plane, 10, 10, 1,1);
+
+        for (auto& sphere: _dspheres){
+            sphere->_sphereController = &_controller;
+            prepareAndInsert(sphere, 10, 10, 1,1);
+        }
+
+**/
      _scene.insert(&_controller);
 
 }

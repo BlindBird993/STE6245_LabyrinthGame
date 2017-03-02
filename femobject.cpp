@@ -7,7 +7,6 @@ int FEMobject::randNum(int nMin, int nMax)
 
 void FEMobject::regularTriangulation(int n,int m, float r,bool switcher)
 {
-
     //n - number of nodes
     //m - number of circlse
     //r - radius
@@ -27,7 +26,6 @@ void FEMobject::regularTriangulation(int n,int m, float r,bool switcher)
     }
     if (switcher){
     this->triangulateDelaunay();}
-
 }
 
 void FEMobject::randomTriangulation(int n, float r)
@@ -54,7 +52,6 @@ void FEMobject::randomTriangulation(int n, float r)
 
         std::swap(p1,p2);
     }
-    std::cout << "num:" << num << std::endl;
     for (int j = 0; j < num*4; j++)
     {
         int todel = randNum(0,this->getSize()-1);
@@ -178,7 +175,6 @@ void FEMobject::computation()
                Tk += (d2 * d2) / (std::abs(d0 ^ d1) * 2);//*0.5
             }
             A[i][i] = Tk;
-            //std::cout << A[i][i] << std::endl;
         }
 
         for (int i=0;i<nodes.getSize();i++){
@@ -191,7 +187,6 @@ void FEMobject::computation()
                 bsum += tr[k]->getArea2D()/3;
             }
             b[i] = bsum;
-           //std::cout << b[i] << std::endl;
         }
         A.invert();
 
@@ -212,7 +207,6 @@ void FEMobject::localSimulate(double dt)
        forceswicher = true;
 
     updateHeight(force);
-    //this->replot();
 }
 
 void FEMobject::setMaxVal(float f)
@@ -233,11 +227,9 @@ void FEMobject::updateHeight(float f)
     GMlib::DVector<float> x1;
     x1.setDim(nodes.getSize());
     x1 = (f*b);
-    GMlib::DVector<float> x = A*x1;//A*x1;
-
+    GMlib::DVector<float> x = A*x1;
 
     for (int i=0;i<nodes.getSize();i++){
-        //std::cout << x[i] << std::endl;
         this->nodes[i].setZ(x[i]);
     }
 

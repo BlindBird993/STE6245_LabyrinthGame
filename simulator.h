@@ -82,12 +82,14 @@ _controller.add(obj.get());
 //helper types
 using DynSphere = collision::DynamicPhysObject<GMlib::PSphere<float>>;
 using Plane = collision::StaticPhysObject<GMlib::PPlane<float>>;
-//using DynSpherePtrVector = std::vector<DynSphere*>; //raw pointer
-//using PlanePtrVector =  std::vector<Plane*>;        //raw pointer
+using Cylinder = collision::StaticPhysObject<GMlib::PCylinder<float>>;
+
+
 using DynSphereVector = std::vector<std::unique_ptr<DynSphere>>;
 using PlaneVector =  std::vector<std::unique_ptr<Plane>>;
 using BoxVector =  std::vector<std::unique_ptr<Box>>;
 
+using DynCylinderVector = std::vector<std::unique_ptr<Cylinder>>;
 
 /*class SimulationController : public GMlib::SceneObject{
     GM_SCENEOBJECT(SimulationController)
@@ -114,13 +116,21 @@ public:
     //FEM
     void simulateReplotSim();
 
+    collision::DynamicPhysObject<GMlib::PSphere<float> >*   _controlSphere;
+
+
+
 private:
     GMlib::Scene&                    _scene;
-    collision::MyController  _controller;
+    collision::MyController         _controller;
 
     DynSphereVector                  _dspheres;
     PlaneVector                      _planes;
     BoxVector                        _box;
+    DynCylinderVector                _cylinders;
+
+    FEMobject*    _obj1;
+    FEMobject*    _obj2;
 
     template <typename T>
     void prepareAndInsert(const std::unique_ptr<T>& obj, int m1, int m2, int d1, int d2);

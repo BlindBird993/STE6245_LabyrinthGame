@@ -116,6 +116,16 @@ void Scenario::initializeScenario() {
   GMlib::Vector<float,3> init_cam_dir( 0.0f, 1.0f, 0.0f );
   GMlib::Vector<float,3> init_cam_up(  0.0f, 0.0f, 1.0f );
 
+
+  // Top cam
+  auto top_rcpair = createRCPair("Top");
+  top_rcpair.camera->enableCulling(false);
+
+  top_rcpair.camera->set( init_cam_pos + GMlib::Vector<float,3>( 0.0f, 0.0f, 60.0f ), -init_cam_up, init_cam_dir );
+  top_rcpair.camera->setCuttingPlanes( 1.0f, 100.0f );
+  scene()->insertCamera( top_rcpair.camera.get() );
+  top_rcpair.renderer->reshape( GMlib::Vector<int,2>(init_viewport_size, init_viewport_size) );
+
   // Projection cam
   auto proj_rcpair = createRCPair("Projection");
   proj_rcpair.camera->enableCulling(false);
@@ -145,32 +155,12 @@ void Scenario::initializeScenario() {
   scene()->insertCamera( side_rcpair.camera.get() );
   side_rcpair.renderer->reshape( GMlib::Vector<int,2>(init_viewport_size, init_viewport_size) );
 
-  // Top cam
-  auto top_rcpair = createRCPair("Top");
-  top_rcpair.camera->enableCulling(false);
 
-  top_rcpair.camera->set( init_cam_pos + GMlib::Vector<float,3>( 0.0f, 0.0f, 50.0f ), -init_cam_up, init_cam_dir );
-  top_rcpair.camera->setCuttingPlanes( 1.0f, 20.0f );
-  scene()->insertCamera( top_rcpair.camera.get() );
-  top_rcpair.renderer->reshape( GMlib::Vector<int,2>(init_viewport_size, init_viewport_size) );
 
 
   _simulator = std::make_shared<Simulator>(*scene());
   _simulator->setupSimulator();
 
-
-//default scenario (torus)
-  /*// Surface visualizers
-  auto surface_visualizer = new GMlib::PSurfNormalsVisualizer<float,3>;
-
-  // Surface
-  auto surface = new TestTorus;
-  surface->toggleDefaultVisualizer();
-  surface->insertVisualizer(surface_visualizer);
-  surface->replot(200,200,1,1);
-  scene()->insert(surface);
-
-  surface->test01();*/
 
 }
 
@@ -181,7 +171,28 @@ void Scenario::cleanupScenario() {
 }
 
 //FEM
-//void Scenario::simulateReplot()
-//{
-//    //_simulator->simulateReplotSim();
-//}
+void Scenario::simulateReplot()
+{
+    _simulator->simulateReplotSim();
+}
+
+//sphere up
+void Scenario::sphereUp(){
+
+    _simulator->_controlSphere->moveUp();
+}
+
+void Scenario::sphereDown()
+{
+   _simulator->_controlSphere->moveDown();
+}
+
+void Scenario::sphereLeft()
+{
+    _simulator->_controlSphere->moveLeft();
+}
+
+void Scenario::sphereRight()
+{
+  _simulator->_controlSphere->moveRight();
+}

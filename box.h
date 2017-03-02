@@ -19,6 +19,9 @@ class Box : public GMlib::SceneObject {
     public:
     // 6 planes
     std::vector<std::shared_ptr<collision::StaticPPlane>> planes;
+
+    //std::vector<std::shared_ptr<collision::StaticPSphere>> spheres;
+
     // 12 edges
     //  std::vector <GMlib::PCylinder<float>> cylinders;
     // 8 vertices
@@ -39,6 +42,8 @@ class Box : public GMlib::SceneObject {
     void create();
 
     std::vector<std::shared_ptr<collision::StaticPPlane> > getPlanes() const;
+
+    //std::vector<std::shared_ptr<collision::StaticPSphere> > getSpheres() const;
 
 protected:
     // void localSimulate(double dt) override;

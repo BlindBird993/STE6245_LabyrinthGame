@@ -37,6 +37,14 @@ public:
   void    initializeScenario() override;
   void    cleanupScenario() override;
 
+//button move
+  void   sphereUp();
+  void   sphereDown();
+  void   sphereLeft();
+  void   sphereRight();
+
+
+
 //FEM
   void    simulateReplot();
 
