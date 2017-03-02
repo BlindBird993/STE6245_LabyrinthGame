@@ -409,8 +409,8 @@ void Simulator::setupSimulator()
 
    _controlSphere = (_dspheres.at(0)).get();
 
-   _dspheres.at(0)->velocity = GMlib::Vector<double,3>(0.0f,2.0f,0.0f);
-   _dspheres.at(0)->translateGlobal(GMlib::Vector<float,3>(0.0f,5.0f,2.0f));
+   _dspheres.at(0)->velocity = GMlib::Vector<double,3>(0.0f,1.0f,0.0f);
+   _dspheres.at(0)->translateGlobal(GMlib::Vector<float,3>(-18.0f,18.0f,1.0f));
 
 //   _dspheres.at(1)->velocity = GMlib::Vector<double,3>(0.0f,0.0f,0.0f);
 //   _dspheres.at(1)->translateGlobal(GMlib::Vector<float,3>(0.0f,-5.0f,2.0f));

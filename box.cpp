@@ -37,10 +37,64 @@ Box::Box(double x, double y, double z, GMlib::Material color)
                       GMlib::Vector<float,3>(-y, 0.0f, 0.0f),
                       GMlib::Vector<float,3>(0.0f, 0.0f, -z)));
 
-
+    //first wall
     planes.push_back(std::make_unique<collision::StaticPPlane>
-                     (GMlib::Point<float,3>(0.0f, 0.0f, 0.0f),
+                     (GMlib::Point<float,3>(10.0f, 15.0f, 0.0f),
+                      GMlib::Vector<float,3>(-30.0f, 0.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
+
+    //first wall2
+    planes.push_back(std::make_unique<collision::StaticPPlane> //inverse
+                     (GMlib::Point<float,3>(10.0f, 14.8f, 0.0f),
+                      GMlib::Vector<float,3>(-30.0f, 0.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
+
+
+    //second wall
+    planes.push_back(std::make_unique<collision::StaticPPlane>
+                     (GMlib::Point<float,3>(10.0f, 15.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, -15.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
+
+    //second wall2
+    planes.push_back(std::make_unique<collision::StaticPPlane>//inverse
+                     (GMlib::Point<float,3>(10.2f, 15.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, -15.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
+
+    //third wall
+    planes.push_back(std::make_unique<collision::StaticPPlane>
+                     (GMlib::Point<float,3>(10.0f, 0.0f, 0.0f),
+                      GMlib::Vector<float,3>(-20.0f, 0.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
+
+
+    //fourth wall
+    planes.push_back(std::make_unique<collision::StaticPPlane>
+                     (GMlib::Point<float,3>(15.0f, 10.0f, 0.0f),
                       GMlib::Vector<float,3>(5.0f, 0.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
+
+
+    //fifth wall
+    planes.push_back(std::make_unique<collision::StaticPPlane>
+                     (GMlib::Point<float,3>(10.0f, 5.0f, 0.0f),
+                      GMlib::Vector<float,3>(5.0f, 0.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
+
+
+
+    //sixth wall
+    planes.push_back(std::make_unique<collision::StaticPPlane>
+                     (GMlib::Point<float,3>(0.0f, -5.0f, 0.0f),
+                      GMlib::Vector<float,3>(-20.0f, 0.0f, 0.0f),
+                      GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
+
+
+    //seventh wall
+    planes.push_back(std::make_unique<collision::StaticPPlane>
+                     (GMlib::Point<float,3>(20.0f, -10.0f, 0.0f),
+                      GMlib::Vector<float,3>(-25.0f, 0.0f, 0.0f),
                       GMlib::Vector<float,3>(0.0f, 0.0f, 5.0f)));
 
 
