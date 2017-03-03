@@ -528,6 +528,40 @@ void DefaultHidManager::heGoRight() {
 
     emit signGoRight();
 }
+
+void DefaultHidManager::heGoThrough() {
+
+    emit signGoThrough();
+}
+
+
+
+void DefaultHidManager::heTUp() {
+
+    emit signTUp();
+}
+
+void DefaultHidManager::heTDown() {
+
+    emit signTDown();
+}
+
+void DefaultHidManager::heTLeft() {
+
+    emit signTLeft();
+}
+
+void DefaultHidManager::heTRight() {
+
+    emit signTRight();
+}
+
+
+
+
+
+
+
 void DefaultHidManager::setupDefaultHidBindings() {
 
   //// Register Hid Actions
@@ -695,6 +729,43 @@ void DefaultHidManager::setupDefaultHidBindings() {
                           this, SLOT(heGoRight()),
                           OGL_TRIGGER);
 
+  QString ha_id_control_through =
+       registerHidAction( "Controls",
+                          "Ball go",
+                          "Ball go",
+                          this, SLOT(heGoThrough()),
+                          OGL_TRIGGER);
+
+
+  QString ha_id_control_Tup =
+       registerHidAction( "Controls",
+                          "translate up",
+                          "Ball up",
+                          this, SLOT(heTUp()),
+                          OGL_TRIGGER);
+
+  QString ha_id_control_Tdown =
+       registerHidAction( "Controls",
+                          "translate down",
+                          "Ball down",
+                          this, SLOT(heTDown()),
+                          OGL_TRIGGER);
+
+  QString ha_id_control_Tleft =
+       registerHidAction( "Controls",
+                          "translate left",
+                          "Ball left",
+                          this, SLOT(heTLeft()),
+                          OGL_TRIGGER);
+
+  QString ha_id_control_Tright =
+       registerHidAction( "Controls",
+                          "translate right",
+                          "Ball right",
+                          this, SLOT(heTRight()),
+                          OGL_TRIGGER);
+
+
 
   //// Set up initial mapping
   registerHidMapping( ha_id_objsel_toggle_all,            new KeyPressInput( Qt::Key_A ) );
@@ -709,6 +780,18 @@ void DefaultHidManager::setupDefaultHidBindings() {
   registerHidMapping( ha_id_control_down,                 new KeyPressInput( Qt::Key_Down));
   registerHidMapping( ha_id_control_left,                 new KeyPressInput( Qt::Key_Left));
   registerHidMapping( ha_id_control_right,                new KeyPressInput( Qt::Key_Right));
+
+
+
+  registerHidMapping( ha_id_control_Tup,                   new KeyPressInput( Qt::Key_Up,Qt::ControlModifier));
+  registerHidMapping( ha_id_control_Tdown,                 new KeyPressInput( Qt::Key_Down,Qt::ControlModifier));
+  registerHidMapping( ha_id_control_Tleft,                 new KeyPressInput( Qt::Key_Left,Qt::ControlModifier));
+  registerHidMapping( ha_id_control_Tright,                new KeyPressInput( Qt::Key_Right,Qt::ControlModifier));
+
+
+
+
+  registerHidMapping( ha_id_control_through,              new KeyPressInput( Qt::Key_Space));
 
   registerHidMapping( ha_id_objsel_select,                new MousePressInput( Qt::RightButton ) );
   registerHidMapping( ha_id_view_lock_to,                 new MousePressInput( Qt::RightButton, Qt::ControlModifier ) );

@@ -53,6 +53,14 @@ private:
   void sphereLeft();
   void sphereRight();
 
+  void sphereThrough();
+
+
+  void translateUp();
+  void translateDown();
+  void translateLeft();
+  void translateRight();
+
 //FEM
   void replotSimulateGui();
 

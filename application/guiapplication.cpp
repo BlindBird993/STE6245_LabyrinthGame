@@ -140,6 +140,25 @@ GuiApplication::afterOnSceneGraphInitialized() {
 
   connect( &_hidmanager, &DefaultHidManager::signGoRight,
               this, &GuiApplication::sphereRight, Qt::DirectConnection );
+  //go
+  connect( &_hidmanager, &DefaultHidManager::signGoThrough,
+              this, &GuiApplication::sphereThrough, Qt::DirectConnection );
+
+
+
+  connect( &_hidmanager, &DefaultHidManager::signTUp,
+              this, &GuiApplication::translateUp, Qt::DirectConnection );
+
+  connect( &_hidmanager, &DefaultHidManager::signTDown,
+              this, &GuiApplication::translateDown, Qt::DirectConnection );
+
+  connect( &_hidmanager, &DefaultHidManager::signTLeft,
+              this, &GuiApplication::translateLeft, Qt::DirectConnection );
+
+  connect( &_hidmanager, &DefaultHidManager::signTRight,
+              this, &GuiApplication::translateRight, Qt::DirectConnection );
+
+
 
   //end of connects
 
@@ -170,6 +189,31 @@ void GuiApplication::sphereRight()
 {
     _scenario.sphereRight();
 
+}
+
+void GuiApplication::sphereThrough()
+{
+    _scenario.sphereGoThrough();
+}
+
+void GuiApplication::translateUp()
+{
+    _scenario.translateUp();
+}
+
+void GuiApplication::translateDown()
+{
+    _scenario.translateDown();
+}
+
+void GuiApplication::translateLeft()
+{
+    _scenario.translateLeft();
+}
+
+void GuiApplication::translateRight()
+{
+    _scenario.translateRight();
 }
 
 const GuiApplication& GuiApplication::instance() {  return *_instance; }

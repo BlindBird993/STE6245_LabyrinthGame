@@ -43,7 +43,14 @@ public:
   void   sphereLeft();
   void   sphereRight();
 
+  //go through
+  void   sphereGoThrough();
 
+//button move
+  void   translateUp();
+  void   translateDown();
+  void   translateLeft();
+  void   translateRight();
 
 //FEM
   void    simulateReplot();

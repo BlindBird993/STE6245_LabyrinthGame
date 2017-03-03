@@ -256,23 +256,6 @@ void Simulator::simulateReplotSim()
 **/
 
 
-//{
-//   _dspheres.push_back(sphere);
-
-//}
-
-//void SimulationController::add(Plane * const plane)
-//{
-//    _planes.push_back(plane);
-
-//}
-
-//void SimulationController::localSimulate(double dt)
-//{
-
-
-//}*/
-
 Simulator::Simulator(GMlib::Scene& scene) : _scene{scene}
 {
 
@@ -281,8 +264,8 @@ Simulator::Simulator(GMlib::Scene& scene) : _scene{scene}
 //FEM
     void Simulator::simulateReplotSim()
     {
-//                _obj1->replot();
-//                _obj2->replot();
+                _obj1->replot();
+                _obj2->replot();
     }
 
 
@@ -380,54 +363,50 @@ void Simulator::setupSimulator()
 
  //FEM
 
-//    _obj1 = new FEMobject();
-//    _obj2 = new FEMobject();
+    _obj1 = new FEMobject();
+    _obj2 = new FEMobject();
 
-//    _obj1->regularTriangulation(10,5,5,true);
-//    _obj2->randomTriangulation(50,5);
+    _obj1->regularTriangulation(10,5,5,true);
+    _obj2->randomTriangulation(50,5);
 
-//    _obj1->translateGlobal(GMlib::Vector<float,3> (12.0f,0.0f,0.0f),true);
-//    _obj1->computation();
-//    _obj1->updateHeight(1);
+    _obj1->translateGlobal(GMlib::Vector<float,3> (12.0f,0.0f,0.0f),true);
+    _obj1->computation();
+    _obj1->updateHeight(1);
 
-//    _obj2->computation();
-//    _obj2->updateHeight(1);
+    _obj2->computation();
+    _obj2->updateHeight(1);
 
-//    _obj1->toggleDefaultVisualizer();
-
-
-//    _obj2->toggleDefaultVisualizer();
+    _obj1->toggleDefaultVisualizer();
 
 
-//    _scene.insert(_obj1);
-//    _scene.insert(_obj2);
+    _obj2->toggleDefaultVisualizer();
 
 
-   _dspheres.push_back(std::make_unique<DynSphere>());
+    _scene.insert(_obj1);
+    _scene.insert(_obj2);
+
+
 //   _dspheres.push_back(std::make_unique<DynSphere>());
-   //_dspheres.push_back(std::make_unique<DynSphere>());
 
-   _controlSphere = (_dspheres.at(0)).get();
+//   _controlSphere = (_dspheres.at(0)).get();
 
-   _dspheres.at(0)->velocity = GMlib::Vector<double,3>(0.0f,1.0f,0.0f);
-   _dspheres.at(0)->translateGlobal(GMlib::Vector<float,3>(-18.0f,18.0f,1.0f));
-
-//   _dspheres.at(1)->velocity = GMlib::Vector<double,3>(0.0f,0.0f,0.0f);
-//   _dspheres.at(1)->translateGlobal(GMlib::Vector<float,3>(0.0f,-5.0f,2.0f));
+//   _dspheres.at(0)->velocity = GMlib::Vector<double,3>(0.0f,1.0f,0.0f);
+//   _dspheres.at(0)->translateGlobal(GMlib::Vector<float,3>(-18.0f,18.0f,1.0f));
+//   _dspheres.at(0)->setMaterial(GMlib::GMmaterial::blackPlastic());
 
 
-   _box.push_back(std::make_unique<Box>(20,40,10, GMlib::GMmaterial::copper() ));
+//   _box.push_back(std::make_unique<Box>(20,40,10, GMlib::GMmaterial::copper() ));
 
 
-   for (const auto& box : _box)
-       prepareAndInsert(box , 10, 10, 1 ,1);
-   for (const auto& plane : _planes)
-       prepareAndInsert(plane , 10, 10, 1 ,1);
+//   for (const auto& box : _box)
+//       prepareAndInsert(box , 10, 10, 1 ,1);
+//   for (const auto& plane : _planes)
+//       prepareAndInsert(plane , 10, 10, 1 ,1);
 
-   for (const auto& sphere : _dspheres){
-       sphere->_sphereController = &_controller;
-       prepareAndInsert(sphere , 10, 10, 1 ,1);
-   }
+//   for (const auto& sphere : _dspheres){
+//       sphere->_sphereController = &_controller;
+//       prepareAndInsert(sphere , 10, 10, 1 ,1);
+//   }
 
 
 

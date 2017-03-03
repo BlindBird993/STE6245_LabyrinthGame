@@ -38,6 +38,15 @@ signals:
   void signGoLeft();
   void signGoRight();
 
+
+  void signTUp();
+  void signTDown();
+  void signTLeft();
+  void signTRight();
+
+//
+  void signGoThrough();
+
 private slots:
   virtual void                      heDeSelectAllObjects();
   virtual void                      heEdit();
@@ -70,6 +79,13 @@ private slots:
   virtual void                      heGoDown();
   virtual void                      heGoLeft();
   virtual void                      heGoRight();
+
+  virtual void                      heTUp();
+  virtual void                      heTDown();
+  virtual void                      heTLeft();
+  virtual void                      heTRight();
+
+  virtual void                      heGoThrough();
 
 private:
   GMlib::Camera*                    findCamera( const QString& view_name ) const;

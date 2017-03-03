@@ -117,8 +117,8 @@ Box::Box(double x, double y, double z, GMlib::Material color)
                       GMlib::Vector<float,3>(0.0f, y, 0.0f)));
 
 
-    //spheres.push_back(std::make_unique<collision::StaticPSphere>());
-   // spheres.at(0)->translateGlobal(GMlib::Vector<float,3>(10.0f,10.0f,2.0f));
+//    spheres.push_back(std::make_unique<collision::StaticPSphere>());
+//    spheres.at(0)->translateGlobal(GMlib::Vector<float,3>(10.0f,10.0f,2.0f));
 
 
 

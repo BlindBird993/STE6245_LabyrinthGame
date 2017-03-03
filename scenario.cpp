@@ -194,5 +194,30 @@ void Scenario::sphereLeft()
 
 void Scenario::sphereRight()
 {
-  _simulator->_controlSphere->moveRight();
+    _simulator->_controlSphere->moveRight();
+}
+//go
+void Scenario::sphereGoThrough()
+{
+    _simulator->_controlSphere->getThrough();
+}
+//translate
+void Scenario::translateUp()
+{
+     _simulator->_controlSphere->translateUp();
+}
+
+void Scenario::translateDown()
+{
+     _simulator->_controlSphere->translateDown();
+}
+
+void Scenario::translateLeft()
+{
+     _simulator->_controlSphere->translateLeft();
+}
+
+void Scenario::translateRight()
+{
+     _simulator->_controlSphere->translateRight();
 }
