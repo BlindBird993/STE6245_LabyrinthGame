@@ -140,9 +140,7 @@ GuiApplication::afterOnSceneGraphInitialized() {
 
   connect( &_hidmanager, &DefaultHidManager::signGoRight,
               this, &GuiApplication::sphereRight, Qt::DirectConnection );
-  //go
-  connect( &_hidmanager, &DefaultHidManager::signGoThrough,
-              this, &GuiApplication::sphereThrough, Qt::DirectConnection );
+
 
 
 
@@ -191,10 +189,6 @@ void GuiApplication::sphereRight()
 
 }
 
-void GuiApplication::sphereThrough()
-{
-    _scenario.sphereGoThrough();
-}
 
 void GuiApplication::translateUp()
 {

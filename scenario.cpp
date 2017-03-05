@@ -122,7 +122,7 @@ void Scenario::initializeScenario() {
   top_rcpair.camera->enableCulling(false);
 
   top_rcpair.camera->set( init_cam_pos + GMlib::Vector<float,3>( 0.0f, 0.0f, 60.0f ), -init_cam_up, init_cam_dir );
-  top_rcpair.camera->setCuttingPlanes( 1.0f, 100.0f );
+  top_rcpair.camera->setCuttingPlanes( 1.0f, 1000.0f );
   scene()->insertCamera( top_rcpair.camera.get() );
   top_rcpair.renderer->reshape( GMlib::Vector<int,2>(init_viewport_size, init_viewport_size) );
 
@@ -196,11 +196,7 @@ void Scenario::sphereRight()
 {
     _simulator->_controlSphere->moveRight();
 }
-//go
-void Scenario::sphereGoThrough()
-{
-    _simulator->_controlSphere->getThrough();
-}
+
 //translate
 void Scenario::translateUp()
 {
