@@ -8,3 +8,5 @@ Structure of the maze is created as a box which consists of simple planes, spher
 Collision detection between sphere and plane, as well as between different spheres was implemented.
 
 ![alt text](https://raw.githubusercontent.com/BlindBird993/STE6245_LabyrinthGame/Screenshot 2017-03-04 18.24.12.png)
+
+![alt text](https://raw.githubusercontent.com/BlindBird993/STE6245_LabyrinthGame/Screenshots/path/to/Screenshot 2017-03-04 18.24.12.png)
